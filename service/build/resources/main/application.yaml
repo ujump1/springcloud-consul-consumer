@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-cloud-consul-consumer
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName : ${spring.application.name} #注册在consul上面的名字，在consul的调用中，是通过此名字调用的。默认服务名,不要改
+        enabled: true #默认true。Consul Discovery Client是否注册到注册中心。和register同时设置成false，就不需要起consul服务。
+        register: true #是否将服务注册到Consul集群中心.。这个参数和上面的enabled参数同时设置成false，应用才不会注册注册中心，才可以不起consul服务！
+        deregister: true #默认true，服务停止时注销服务，即从服务列表中删除。设置成false的话，？？？
+        instance-id: ${spring.application.name} #service-id
+        health-check-interval: 10s  #配置 Consul 健康检查频率，也就是心跳频率。
+        health-check-timeout: 10s #健康检查超时
+        #health-check-critical-timeout: 10s #注册成功之后，如果关闭微服务，consul将检测60s,如果60s之后还检测不到此服务，将会把此服务从注册列表中移除.如果想重启consul，服务能主动注册到consul，这个参数必须注释掉！！！
+        #health-check-path: /hello/health #自定义健康检查路径
+        prefer-ip-address: true #表示注册时使用IP而不是hostname
+server:
+  port: 9003

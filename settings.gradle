@@ -1,0 +1,5 @@
+rootProject.name = 'springcloud-consul-consumer'
+include 'entity'
+include 'api'
+include 'service'
+
