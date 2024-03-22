@@ -11,6 +11,28 @@ repositories {
     mavenCentral()
 }
 
+// 打ar包
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+// 扩展定义
+ext {
+    // 启动类
+    MainClass = 'springboots.SpringbootApplication'
+}
+bootJar {
+    enabled = true
+    archiveName = 'consumer.jar'
+    mainClassName = MainClass
+    manifest {
+        attributes("Manifest-Version": "6.0")
+        attributes("Created-By": "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString())
+        attributes("Implementation-Title": "$project.name")
+        attributes("Implementation-Version": "$project.version")
+        attributes("Build-Time": new Date().format("yyyy-MM-dd HH:mm:ss"))
+    }
+}
+
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile project(':api')
