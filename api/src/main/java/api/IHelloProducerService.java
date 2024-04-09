@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 提供api给其他服务（打包）
  */
-@FeignClient(name="spring-cloud-consul-consumer",path = "hello")
+@FeignClient(name="spring-cloud-consul-consumer",path = "helloProducer")
 public interface IHelloProducerService {
 
 	@GetMapping("/sayHello")
